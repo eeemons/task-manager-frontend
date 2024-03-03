@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { SignUpReq } from "../api/api";
 import { useNavigate } from "react-router-dom";
+import { toast, Toaster } from "react-hot-toast";
+import { Link } from "react-router-dom";
 const Signup = () => {
   const [submitData, setSubmitData] = useState({});
   const navigate = useNavigate();
@@ -13,10 +15,14 @@ const Signup = () => {
         console.log(res);
         navigate("/");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        toast.error(err.response.data);
+      });
   };
   return (
-    <div className="min-w-screen min-h-screen bg-gray-900 flex items-center justify-center px-5 py-5">
+    <div className="min-w-screen min-h-screen flex items-center justify-center px-5 py-5">
+      <Toaster />
       <div
         className="bg-gray-100 text-gray-500 rounded-3xl shadow-xl w-full overflow-hidden"
         style={{ maxWidth: 1000 }}
@@ -296,6 +302,14 @@ const Signup = () => {
                     REGISTER NOW
                   </button>
                 </div>
+              </div>
+              <div className="flex justify-center">
+                <span className="">
+                  If you have already registered please{" "}
+                  <Link to="/" className="text-blue-500 underline">
+                    login
+                  </Link>
+                </span>
               </div>
             </div>
           </div>

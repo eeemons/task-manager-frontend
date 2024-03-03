@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { LoginReq } from "../api/api";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { Toaster, toast } from "react-hot-toast";
 const Login = () => {
   const [submitData, setSubmitData] = useState({});
+  const navigate = useNavigate();
 
   const handleInputChange = (field, event) => {
     setSubmitData({
@@ -12,12 +15,19 @@ const Login = () => {
   };
   const handleSubmit = () => {
     LoginReq(submitData)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+      .then((res) => {
+        navigate("/dashboard");
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error(err.response.data);
+      });
   };
 
   return (
     <div className="min-h-screen bg-gray-100 mx-2 flex flex-col justify-center md:py-12">
+      <Toaster />
       <div className="relative py-3 sm:max-w-xl sm:mx-auto">
         <div className="absolute inset-0 bg-gradient-to-r from-blue-300 to-blue-600 shadow-lg transhtmlForm -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"></div>
         <div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
@@ -73,7 +83,7 @@ const Login = () => {
                 </div>
                 <div className="relative">
                   <button
-                    className="bg-blue-500 text-white rounded-md px-2 py-1"
+                    className="bg-blue-500 text-white rounded-md px-2 py-1 hover:bg-blue-700"
                     onClick={handleSubmit}
                   >
                     Submit
