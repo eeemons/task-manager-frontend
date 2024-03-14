@@ -18,6 +18,7 @@ const Login = () => {
       .then((res) => {
         navigate("/dashboard");
         console.log(res);
+        sessionStorage.setItem("token", res?.data?.token);
       })
       .catch((err) => {
         console.log(err);

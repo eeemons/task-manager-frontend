@@ -16,3 +16,13 @@ export const SignUpReq = async (data) => {
   const response = await axios.post(`${server}/users/signup`, data);
   return response;
 };
+
+export const PostTask = async (data) => {
+  const bearerToken = sessionStorage.getItem("token");
+  const response = await axios.post(`${server}/tasks`, data, {
+    headers: {
+      token: bearerToken,
+    },
+  });
+  return response;
+};
