@@ -26,3 +26,10 @@ export const PostTask = async (data) => {
   });
   return response;
 };
+export const GetTask = async () => {
+  const bearerToken = sessionStorage.getItem("token");
+  const response = await axios.get(`${server}/tasks`, {
+    headers: { token: bearerToken },
+  });
+  return response;
+};
