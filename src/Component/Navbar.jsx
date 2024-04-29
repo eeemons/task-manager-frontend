@@ -9,7 +9,7 @@ const Navbar = () => {
     setOpenAddTask(!openAddTask);
   };
   return (
-    <div className="flex p-4 justify-between items-center relative max-w-screen">
+    <div className="flex p-4 justify-between items-center relative max-w-screen border-b">
       <span>Task manager</span>
       <button onClick={handleOpenTask} className="z-10">
         {openAddTask ? (
